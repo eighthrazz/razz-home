@@ -2,22 +2,23 @@ package com.razz.service.garage;
 
 import java.util.Objects;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class NexxGarageEmail {
+@Document(collection = "NexxGarageEvent")
+public class NexxGarageEvent {
 
-  @Id
-  private Long id;
+  @Id private String id;
   private String name;
   private String state;
   private Long date;
 
-  public NexxGarageEmail(String name, String state, Long date) {
+  public NexxGarageEvent(String name, String state, Long date) {
     this.name = name;
     this.state = state;
     this.date = date;
   }
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
@@ -33,7 +34,7 @@ public class NexxGarageEmail {
     return date;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -57,7 +58,7 @@ public class NexxGarageEmail {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    NexxGarageEmail that = (NexxGarageEmail) o;
+    NexxGarageEvent that = (NexxGarageEvent) o;
     return Objects.equals(id, that.id)
         && Objects.equals(name, that.name)
         && Objects.equals(state, that.state)
@@ -71,7 +72,7 @@ public class NexxGarageEmail {
 
   @Override
   public String toString() {
-    return "NexxGarageEmail{"
+    return "NexxGarageEvent{"
         + "id="
         + id
         + ", name='"

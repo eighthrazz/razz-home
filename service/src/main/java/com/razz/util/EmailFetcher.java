@@ -52,11 +52,7 @@ public class EmailFetcher {
   public EmailFetcher(Properties properties) {
     this.properties = properties;
   }
-
-  public Properties getProperties() {
-    return properties;
-  }
-
+  
   public List<String> fetchMessages(String folder, boolean markAsRead) throws Exception {
     LOGGER.info("fetchMessages...");
     final String host = Key.host.toString(properties);
