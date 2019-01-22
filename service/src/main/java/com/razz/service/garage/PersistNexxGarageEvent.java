@@ -40,6 +40,9 @@ public class PersistNexxGarageEvent {
   @Value("${service.garage.email.delayMillis}")
   private long emailDelayMillis;
 
+  @Value("${service.garage.email.markAsRead}")
+  private boolean markAsRead;
+
   @Autowired private NexxGarageEventRepository repository;
 
   public PersistNexxGarageEvent() {
@@ -81,10 +84,10 @@ public class PersistNexxGarageEvent {
       return;
     }
 
-    // persist
+    // persist new events only
     try {
-      for(NexxGarageEvent ngEvent : parseList) {
-        persist(ngEvent);
+      for (NexxGarageEvent ngEvent : parseList) {
+        persistNewEvent(ngEvent);
       }
     } catch (Exception e) {
       LOGGER.error("Unable to persist email. ", e);
@@ -93,7 +96,6 @@ public class PersistNexxGarageEvent {
   }
 
   List<String> fetch() throws Exception {
-    final boolean markAsRead = false;
     final List<String> messageList = getEmailFetcher().fetchMessages(emailFolder, markAsRead);
     return messageList;
   }
@@ -123,10 +125,12 @@ public class PersistNexxGarageEvent {
     }
   }
 
-  void persist(NexxGarageEvent ngEvent) {
-    //if (!repository.exists(ngEvent.getDate())) {
-      //LOGGER.info("{} does not exist. ", ngEvent);
-    //}
-    repository.save(ngEvent);
+  void persistNewEvent(NexxGarageEvent ngEvent) {
+    if (repository.findByDate(ngEvent.getDate()).isEmpty()) {
+      LOGGER.info("Saving event: {}", ngEvent);
+      repository.save(ngEvent);
+    } else {
+      LOGGER.info("Event already exists. Ignoring event: {}", ngEvent);
+    }
   }
 }

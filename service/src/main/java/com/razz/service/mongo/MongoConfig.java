@@ -41,7 +41,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
     final MongoCredential mongoCredential =
         MongoCredential.createCredential(mongoUser, mongoDatabase, mongoPassword.toCharArray());
     final MongoClientOptions mongoClientOptions =
-        MongoClientOptions.builder().sslEnabled(false).build();
+        MongoClientOptions.builder().sslEnabled(false).socketTimeout(1500).build();
     return new MongoClient(serverAddress, mongoCredential, mongoClientOptions);
   }
 }

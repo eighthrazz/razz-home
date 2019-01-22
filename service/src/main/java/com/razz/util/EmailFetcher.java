@@ -54,7 +54,7 @@ public class EmailFetcher {
   }
   
   public List<String> fetchMessages(String folder, boolean markAsRead) throws Exception {
-    LOGGER.info("fetchMessages...");
+    LOGGER.info("fetchMessages: folder={}, markAsRead={}", folder, markAsRead);
     final String host = Key.host.toString(properties);
     final int port = Key.port.toInt(properties);
     final String username = Key.username.toString(properties);
@@ -68,7 +68,7 @@ public class EmailFetcher {
       final String text = TextUtil.toString(m.getInputStream());
       messageList.add(text);
     }
-    LOGGER.info("...done");
+    LOGGER.info("...done reading messages");
     return messageList;
   }
 
