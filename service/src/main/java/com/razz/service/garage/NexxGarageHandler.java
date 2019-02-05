@@ -9,13 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PersistNexxGarageEvent {
+public class NexxGarageHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PersistNexxGarageEvent.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(NexxGarageHandler.class);
 
   static final String REGEX = "(.*) has been (.*) on (.*) at (.*)";
   static final String DTG_FORMAT = "MMMMM d, yyyy hh:mma";
@@ -45,27 +44,16 @@ public class PersistNexxGarageEvent {
 
   @Autowired private NexxGarageEventRepository repository;
 
-  public PersistNexxGarageEvent() {
+  public NexxGarageHandler() {
     emailFetcher = null;
   }
 
-  private EmailFetcher getEmailFetcher() {
-    if (emailFetcher == null) {
-      LOGGER.info(
-          "{} : emailHost={}, emailPort={}, emailUsername={}, emailPassword=<hidden>",
-          getClass().getSimpleName(),
-          emailHost,
-          emailPort,
-          emailUsername);
-      emailFetcher = new EmailFetcher(emailHost, emailPort, emailUsername, emailPassword);
-    }
-    return emailFetcher;
+  void test() {
+    LOGGER.info("emailHost:{}", emailHost);
   }
 
-  @Scheduled(fixedDelay = 30000) // TODO
+  /** run. */
   public void run() {
-    LOGGER.info("Running scheduled execution of {}...", getClass().getSimpleName());
-
     // fetch
     final List<String> fetchList = new ArrayList<>();
     try {
@@ -98,6 +86,19 @@ public class PersistNexxGarageEvent {
   List<String> fetch() throws Exception {
     final List<String> messageList = getEmailFetcher().fetchMessages(emailFolder, markAsRead);
     return messageList;
+  }
+
+  private EmailFetcher getEmailFetcher() {
+    if (emailFetcher == null) {
+      LOGGER.info(
+          "{} : emailHost={}, emailPort={}, emailUsername={}, emailPassword=<hidden>",
+          getClass().getSimpleName(),
+          emailHost,
+          emailPort,
+          emailUsername);
+      emailFetcher = new EmailFetcher(emailHost, emailPort, emailUsername, emailPassword);
+    }
+    return emailFetcher;
   }
 
   List<NexxGarageEvent> parse(List<String> fetchList) throws Exception {
