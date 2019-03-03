@@ -9,9 +9,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-class PingTestScheduler {
+class PingScheduler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PingTestScheduler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PingScheduler.class);
 
   @Value("${service.ping.host.wan}")
   private String hostWan;
@@ -22,9 +22,9 @@ class PingTestScheduler {
   @Value("${service.ping.event.expiredMillis}")
   private long maxEventMillis;
 
-  @Autowired private PingTestHandler pingTestHandler;
+  @Autowired private PingHandler pingTestHandler;
 
-  @Autowired private PingTestEventRepository repository;
+  @Autowired private PingEventRepository repository;
 
   @Scheduled(fixedDelay = 1000)
   void runWan() {
@@ -39,7 +39,7 @@ class PingTestScheduler {
   @Scheduled(initialDelay = 5000, fixedDelay = 60_000_000)
   void deleteOldEvents() {
     final long expireMillis = System.currentTimeMillis() - maxEventMillis;
-    final List<PingTestEvent> pingTestEventList = repository.findByDateLessThan(expireMillis);
+    final List<PingEvent> pingTestEventList = repository.findByDateLessThan(expireMillis);
     LOGGER.info("deleteOldEvents: pingTestEventList.size={}", pingTestEventList.size());
     repository.deleteAll(pingTestEventList);
   }

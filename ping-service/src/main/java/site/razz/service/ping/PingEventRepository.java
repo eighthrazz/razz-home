@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PingTestEventRepository extends MongoRepository<PingTestEvent, String> {
+public interface PingEventRepository extends MongoRepository<PingEvent, String> {
 
   @Query("{ 'date' : { $lt : ?0 } }")
-  List<PingTestEvent> findByDateLessThan(long date);
+  List<PingEvent> findByDateLessThan(long date);
 
 }

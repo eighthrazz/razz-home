@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PingTestHandler {
+public class PingHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PingTestHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PingHandler.class);
 
   private final Map<String, InetAddress> inetAddressMap;
 
   @Value("${service.ping.timeoutMillis}")
   private int timeoutMillis;
 
-  @Autowired private PingTestEventRepository repository;
+  @Autowired private PingEventRepository repository;
 
-  public PingTestHandler() {
+  public PingHandler() {
     LOGGER.info("init: timeoutMillis={}", timeoutMillis);
     inetAddressMap = new HashMap<>();
   }
@@ -31,7 +31,7 @@ public class PingTestHandler {
   public void run(String host) {
     try {
       // execute ping test
-      final PingTestEvent pingTestEvent = ping(host);
+      final PingEvent pingTestEvent = ping(host);
       LOGGER.info("run: {}", pingTestEvent);
 
       // persist
@@ -42,7 +42,7 @@ public class PingTestHandler {
     }
   }
 
-  PingTestEvent ping(String host) throws IOException {
+  PingEvent ping(String host) throws IOException {
     final InetAddress inetAddress = getInetAddress(host);
     final long startNanos = System.nanoTime();
     inetAddress.isReachable(timeoutMillis);
@@ -59,7 +59,7 @@ public class PingTestHandler {
     return inetAddressMap.get(host);
   }
 
-  static PingTestEvent getPingTestEvent(String host, double millis) {
-    return new PingTestEvent(host, millis, System.currentTimeMillis());
+  static PingEvent getPingTestEvent(String host, double millis) {
+    return new PingEvent(host, millis, System.currentTimeMillis());
   }
 }

@@ -4,15 +4,15 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "PingTestEvent")
-public class PingTestEvent {
+@Document(collection = "PingEvent")
+public class PingEvent {
 
   @Id private String id;
   private String host;
   private Double millis;
   private Long date;
 
-  public PingTestEvent(String host, Double millis, Long date) {
+  public PingEvent(String host, Double millis, Long date) {
     this.host = host;
     this.millis = millis;
     this.date = date;
@@ -58,7 +58,7 @@ public class PingTestEvent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PingTestEvent that = (PingTestEvent) o;
+    PingEvent that = (PingEvent) o;
     return Objects.equals(id, that.id)
         && Objects.equals(host, that.host)
         && Objects.equals(millis, that.millis)
@@ -72,7 +72,7 @@ public class PingTestEvent {
 
   @Override
   public String toString() {
-    return "PingTestEvent{"
+    return "PingEvent{"
         + "id='"
         + id
         + '\''
