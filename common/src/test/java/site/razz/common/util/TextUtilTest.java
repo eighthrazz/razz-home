@@ -1,9 +1,9 @@
-package com.razz.util;
+package site.razz.common.util;
+
+import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TextUtilTest {
 
@@ -14,4 +14,5 @@ public class TextUtilTest {
     final long dtgLong = 1546455000000L;
     assertTrue(TextUtil.dateToLong(dtg, dtgFormat) == dtgLong);
   }
+
 }
