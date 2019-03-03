@@ -1,4 +1,4 @@
-package com.razz.ping;
+package com.razz.service.ping;
 
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,4 +1,4 @@
-package com.razz.ping;
+package com.razz.service.ping;
 
 import java.util.Objects;
 import org.springframework.data.annotation.Id;

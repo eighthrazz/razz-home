@@ -1,4 +1,4 @@
-package com.razz.ping;
+package com.razz.service.ping;
 
 import java.util.List;
 import org.slf4j.Logger;

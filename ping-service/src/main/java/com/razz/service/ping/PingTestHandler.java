@@ -1,4 +1,4 @@
-package com.razz.ping;
+package com.razz.service.ping;
 
 import java.io.IOException;
 import java.net.InetAddress;
