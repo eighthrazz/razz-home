@@ -7,7 +7,7 @@
   <artifactId>ping-service</artifactId>
 
   <parent>
-    <groupId>home.razz</groupId>
+    <groupId>site.razz</groupId>
     <artifactId>root</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
@@ -29,7 +29,7 @@
       <version>2.1.0.RELEASE</version>
     </dependency>
     <dependency>
-      <groupId>home.razz</groupId>
+      <groupId>site.razz</groupId>
       <artifactId>common</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>

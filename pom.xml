@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>home.razz</groupId>
+  <groupId>site.razz</groupId>
   <artifactId>root</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -18,10 +18,9 @@
 
   <modules>
     <module>common</module>
-    <module>service</module>
-    <module>ui</module>
     <module>ping-service</module>
     <module>garage-service</module>
+    <module>ui</module>
   </modules>
 
 </project>
