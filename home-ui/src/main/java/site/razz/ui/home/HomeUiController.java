@@ -29,10 +29,19 @@ public class HomeUiController {
     return new ModelAndView("index");
   }
 
-  @GetMapping("ping")
-  public ResponseEntity<List<PingEvent>> list() {
+  @GetMapping("ping/list/lan")
+  public ResponseEntity<List<PingEvent>> listLan() {
     return restTemplate.exchange(
-        "http://" + serviceHost + "/ping/list",
+        "http://" + serviceHost + "ping/list/lan",
+        HttpMethod.GET,
+        null,
+        new ParameterizedTypeReference<List<PingEvent>>() {});
+  }
+
+  @GetMapping("ping/list/wan")
+  public ResponseEntity<List<PingEvent>> listWan() {
+    return restTemplate.exchange(
+        "http://" + serviceHost + "ping/list/wan",
         HttpMethod.GET,
         null,
         new ParameterizedTypeReference<List<PingEvent>>() {});
