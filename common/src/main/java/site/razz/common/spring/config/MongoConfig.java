@@ -1,4 +1,4 @@
-package site.razz.common.spring;
+package site.razz.common.spring.config;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -6,7 +6,6 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 

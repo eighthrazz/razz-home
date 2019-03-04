@@ -1,4 +1,4 @@
-package site.razz.service.ping;
+package site.razz.common.spring.entity;
 
 import java.util.Objects;
 import org.springframework.data.annotation.Id;
@@ -11,6 +11,10 @@ public class PingEvent {
   private String host;
   private Double millis;
   private Long date;
+
+  public PingEvent() {
+    this(null, 0D, 0L);
+  }
 
   public PingEvent(String host, Double millis, Long date) {
     this.host = host;

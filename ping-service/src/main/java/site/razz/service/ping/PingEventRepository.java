@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+import site.razz.common.spring.entity.PingEvent;
 
 @Repository
 public interface PingEventRepository extends MongoRepository<PingEvent, String> {

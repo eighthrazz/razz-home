@@ -20,7 +20,7 @@
     <module>common</module>
     <module>ping-service</module>
     <module>garage-service</module>
-    <module>ui</module>
+    <module>home-ui</module>
   </modules>
 
 </project>

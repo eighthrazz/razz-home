@@ -12,6 +12,10 @@ public class NexxGarageEvent {
   private String state;
   private Long date;
 
+  public NexxGarageEvent() {
+    this(null, null, 0L);
+  }
+
   public NexxGarageEvent(String name, String state, Long date) {
     this.name = name;
     this.state = state;
