@@ -32,7 +32,7 @@ public class HomeUiController {
   @GetMapping("ping/list/lan")
   public ResponseEntity<List<PingEvent>> listLan() {
     return restTemplate.exchange(
-        "http://" + serviceHost + "ping/list/lan",
+        "http://ping-service/ping/list/lan",
         HttpMethod.GET,
         null,
         new ParameterizedTypeReference<List<PingEvent>>() {});
@@ -41,7 +41,7 @@ public class HomeUiController {
   @GetMapping("ping/list/wan")
   public ResponseEntity<List<PingEvent>> listWan() {
     return restTemplate.exchange(
-        "http://" + serviceHost + "ping/list/wan",
+        "http://ping-service/ping/list/wan",
         HttpMethod.GET,
         null,
         new ParameterizedTypeReference<List<PingEvent>>() {});
