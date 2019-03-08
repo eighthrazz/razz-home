@@ -1,10 +1,10 @@
 package site.razz.ui.home;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +17,9 @@ import site.razz.common.spring.entity.PingEvent;
 public class HomeUiController {
 
   private final RestTemplate restTemplate;
-  private final String serviceHost;
 
-  public HomeUiController(RestTemplate restTemplate, @Value("${service.host}") String serviceHost) {
+  public HomeUiController(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
-    this.serviceHost = serviceHost;
   }
 
   @RequestMapping("")
@@ -30,6 +28,7 @@ public class HomeUiController {
   }
 
   @GetMapping("ping/list/lan")
+  @PreAuthorize("hasAuthority('SCOPE_profile')")
   public ResponseEntity<List<PingEvent>> listLan() {
     return restTemplate.exchange(
         "http://ping-service/ping/list/lan",
@@ -39,6 +38,7 @@ public class HomeUiController {
   }
 
   @GetMapping("ping/list/wan")
+  @PreAuthorize("hasAuthority('SCOPE_profile')")
   public ResponseEntity<List<PingEvent>> listWan() {
     return restTemplate.exchange(
         "http://ping-service/ping/list/wan",

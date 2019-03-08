@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+
+spring:
+  application:
+    name: home-ui
+  cloud:
+    config:
+      uri: http://docker.razz.com:8888
+  profiles:
+    active: production
+
+server:
+  port: 8080
+
+okta:
+  oauth2:
+    redirect-uri: /authorization-code/callback
