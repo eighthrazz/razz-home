@@ -9,6 +9,7 @@ spring:
   cloud:
     config:
       uri: http://docker.razz.com:8888
+      fail-fast: true
   profiles:
     active: production
 

@@ -16,10 +16,12 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <java.version>1.8</java.version>
     <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+    <dockerfile.skip>true</dockerfile.skip>
   </properties>
 
   <modules>
     <module>common</module>
+    <module>discovery-service</module>
     <module>ping-service</module>
     <module>garage-service</module>
     <module>home-ui</module>

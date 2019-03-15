@@ -4,33 +4,31 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>site.razz</groupId>
-  <artifactId>discovery</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>discovery</name>
-  <description>Demo project for Spring Boot</description>
+  <artifactId>discovery-service</artifactId>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.3.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <groupId>site.razz</groupId>
+    <artifactId>root</artifactId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
-
-  <properties>
-    <java.version>1.8</java.version>
-    <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-  </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+      <version>2.1.0.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <version>2.1.3.RELEASE</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -52,6 +50,31 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.1.3.RELEASE</version>
+      </plugin>
+
+      <!-- DOCKER -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.10</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <repository>docker-${project.groupId}-${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+          <skip>${dockerfile.skip}</skip>
+        </configuration>
       </plugin>
     </plugins>
   </build>

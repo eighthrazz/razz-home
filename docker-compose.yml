@@ -1,0 +1,30 @@
+version: '3'
+services:
+  discovery:
+    image: docker-site.razz-discovery-service:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+  ping-service:
+    image: docker-site.razz-ping-service:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    depends_on:
+      - discovery
+  garage-service:
+    image: docker-site.razz-garage-service:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    depends_on:
+      - discovery
+  home-ui:
+    image: docker-site.razz-home-ui:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    restart: on-failure
+    depends_on:
+      - discovery
+    ports:
+      - 8080:8080
