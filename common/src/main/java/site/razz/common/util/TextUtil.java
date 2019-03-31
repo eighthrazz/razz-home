@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -55,7 +56,13 @@ public class TextUtil {
   }
 
   public static long dateToLong(String dtg, String dtgFormat) throws ParseException {
+    return dateToLong(dtg, dtgFormat, TimeZone.getTimeZone("America/Chicago"));
+  }
+
+  public static long dateToLong(String dtg, String dtgFormat, TimeZone timeZone)
+      throws ParseException {
     final SimpleDateFormat parser = new SimpleDateFormat(dtgFormat, Locale.US);
+    parser.setTimeZone(timeZone);
     final Date date = parser.parse(dtg);
     return date.getTime();
   }
