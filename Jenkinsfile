@@ -1,17 +1,22 @@
 pipeline {
   agent any
 
-    stages {
-        stage('build') {
-            steps {
-                sh 'mvn clean install -DskipTests'
-            }
-        }
+  tools {
+    maven 'Maven 3.3.9'
+    jdk 'jdk8'
+  }
 
-        stage('test') {
-          steps {
-            sh 'mvn test'
-          }
-        }
+  stages {
+    stage('build') {
+      steps {
+        sh 'mvn clean install -DskipTests'
+      }
     }
+
+    stage('test') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+  }
 }
