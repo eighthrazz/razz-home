@@ -56,7 +56,7 @@ public class TextUtil {
   }
 
   public static long dateToLong(String dtg, String dtgFormat) throws ParseException {
-    return dateToLong(dtg, dtgFormat, TimeZone.getTimeZone("America/Chicago"));
+    return dateToLong(dtg, dtgFormat, TimeZone.getDefault());
   }
 
   public static long dateToLong(String dtg, String dtgFormat, TimeZone timeZone)
