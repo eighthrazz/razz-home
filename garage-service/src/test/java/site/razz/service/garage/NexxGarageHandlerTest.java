@@ -10,6 +10,6 @@ public class NexxGarageHandlerTest {
     final NexxGarageEvent nge = NexxGarageHandler.parse(message);
     Assert.assertEquals(nge.getName(), "Garage 1");
     Assert.assertEquals(nge.getState(), "closed");
-    Assert.assertTrue(nge.getDate() == 1546455000000L);
+    Assert.assertEquals(nge.getDate().longValue(), 1546455000000L);
   }
 }
