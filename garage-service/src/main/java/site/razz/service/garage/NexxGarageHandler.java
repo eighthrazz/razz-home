@@ -1,5 +1,6 @@
 package site.razz.service.garage;
 
+import java.util.TimeZone;
 import site.razz.common.util.EmailFetcher;
 import site.razz.common.util.TextUtil;
 import java.util.ArrayList;
@@ -105,13 +106,17 @@ public class NexxGarageHandler {
   }
 
   static NexxGarageEvent parse(String message) throws Exception {
+    return parse(message, TimeZone.getDefault());
+  }
+
+  static NexxGarageEvent parse(String message, TimeZone timeZone) throws Exception {
     try {
       final String name = TextUtil.find(REGEX, 1, message, "").trim();
       final String state = TextUtil.find(REGEX, 2, message, "").trim();
       final String dateStr = TextUtil.find(REGEX, 3, message, "").trim();
       final String timeStr = TextUtil.find(REGEX, 4, message, "").trim();
       final String dtg = dateStr.concat(" ").concat(timeStr);
-      final Long date = TextUtil.dateToLong(dtg, DTG_FORMAT);
+      final Long date = TextUtil.dateToLong(dtg, DTG_FORMAT, timeZone);
       final NexxGarageEvent ngEmail = new NexxGarageEvent(name, state, date);
       return ngEmail;
     } catch (Exception e) {
