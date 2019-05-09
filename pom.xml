@@ -27,4 +27,31 @@
     <module>home-ui</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>nexus-public</id>
+      <name>Nexus Razz Public</name>
+      <url>http://docker.razz.com/nexus/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>nexus</id>
+      <name>Nexus Razz</name>
+      <url>http://docker.razz.com/nexus/repository/maven-snapshots/</url>
+    </repository>
+  </distributionManagement>
+
 </project>

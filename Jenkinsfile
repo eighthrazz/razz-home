@@ -18,5 +18,14 @@ pipeline {
         sh 'mvn test'
       }
     }
+
+    stage('publish') {
+      when {
+        branch 'develop'
+      }
+      steps {
+        sh 'mvn deploy -Ddockerfile.skip=false -DskipTests'
+      }
+    }
   }
 }
