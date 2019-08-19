@@ -13,5 +13,5 @@ public interface PingEventRepository extends MongoRepository<PingEvent, String> 
   List<PingEvent> findByDateLessThan(long date);
 
   @Query("{ 'host' : { $eq : ?0 } }")
-  List<PingEvent> findByHost(String host);
+  List<PingEvent> findByHostOrderByDate(String host);
 }
