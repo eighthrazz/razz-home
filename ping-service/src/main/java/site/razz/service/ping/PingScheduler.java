@@ -27,12 +27,12 @@ class PingScheduler {
 
   @Autowired private PingEventRepository repository;
 
-  @Scheduled(fixedDelay = 1000)
+  @Scheduled(initialDelay = 5000, fixedDelay = 1000)
   void runWan() {
     pingTestHandler.run(hostWan);
   }
 
-  @Scheduled(fixedDelay = 1000)
+  @Scheduled(initialDelay = 5000, fixedDelay = 1000)
   void runLan() {
     pingTestHandler.run(hostLan);
   }
